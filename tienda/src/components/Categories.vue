@@ -29,7 +29,7 @@
             <!-- Producto 3 -->
             <div class="col-md-3 mb-4">
                 <div class="card border-0 shadow-lg product-card">
-                    <img src="https://carranzaycarranza.com/cdn/shop/articles/manos_joyas.jpg?v=1608258383"
+                    <img src="https://www.marthadebayle.com/wp-content/uploads/2021/09/Accesorios-moda.jpeg"
                         class="card-img-top rounded-3" alt="Producto 3">
                     <div class="category-overlay">Accesorio</div>
                 </div>
@@ -38,7 +38,7 @@
             <!-- Producto 4 -->
             <div class="col-md-3 mb-4">
                 <div class="card border-0 shadow-lg product-card">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9UsXjdQCuaAROd1r-5Io7-4PwpSmjsvu_0Q&s"
+                    <img src="https://img.freepik.com/free-photo/modern-stationary-collection-arrangement_23-2149309628.jpg"
                         class="card-img-top rounded-3" alt="Producto 4">
                     <div class="category-overlay">Tecnología</div>
                 </div>
