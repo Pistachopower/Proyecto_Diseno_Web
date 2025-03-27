@@ -25,7 +25,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+  <div id="carouselExampleDark" class="carousel carousel-dark slide mt-5" data-bs-ride="carousel">
     
     <!-- 🔹 Indicadores dinámicos -->
     <div class="carousel-indicators">

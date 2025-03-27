@@ -1,9 +1,12 @@
 <script setup>
-import Carousel from './Carousel.vue'
+import Hero from './Hero.vue'
+import Category from './Categories.vue'
 </script>
 
 <template>
-    <Carousel />
+    <Hero />
+    
+    <Category />
 </template>
 
 <style scoped>

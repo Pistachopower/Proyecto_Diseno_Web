@@ -1,6 +1,18 @@
 <script setup>
 import Footer from './components/Footer.vue'
 import Header from './components/Header.vue'
+import {onMounted } from 'vue'
+import {useProductsStore} from './store/productsStore'
+
+
+const productsStore = useProductsStore()
+
+onMounted(async () => {
+    productsStore.fetchProducts() // Llama a la acción cuando el componente se monta
+})
+
+
+
 </script>
 
 <template>
@@ -8,6 +20,7 @@ import Header from './components/Header.vue'
         <Header />
         <main>
             <RouterView />
+            
         </main>
         
         <footer class="footer">
