@@ -1,5 +1,4 @@
 <script setup>
-
 </script>
 
 <template>
@@ -8,45 +7,44 @@
         <p class="text-muted">Todos nuestros productos cuentan con una excelente calidad y han sido elaborados de manera
             artesanal por un equipo profesional.</p>
 
-        <div class="row mt-4">
+        <div class="row g-4 mt-4">
             <!-- Producto 1 -->
-            <div class="col-md-3">
+            <div class="col-md-3 mb-4">
                 <div class="card border-0 shadow-lg product-card">
-                    <img src="https://www.emprenderalia.com/wp-content/uploads/Crear-una-tienda-online-en-10-pasos-3-meses-y-sin-inversion.jpg"
+                    <img src="https://t1.uc.ltmcdn.com/es/posts/1/9/8/nombres_para_tiendas_de_ropa_de_mujer_50891_1_600.jpg"
                         class="card-img-top rounded-3" alt="Producto 1">
-                    <div class="category-overlay">Frutas Deshidratadas</div>
+                    <div class="category-overlay">Ropa mujer</div>
                 </div>
             </div>
 
             <!-- Producto 2 -->
-            <div class="col-md-3">
+            <div class="col-md-3 mb-4">
                 <div class="card border-0 shadow-lg product-card">
-                    <img src="https://www.emprenderalia.com/wp-content/uploads/Crear-una-tienda-online-en-10-pasos-3-meses-y-sin-inversion.jpg"
+                    <img src="https://www.gmarfil.com/img/cms/tienda_red.jpg"
                         class="card-img-top rounded-3" alt="Producto 2">
-                    <div class="category-overlay">Mermeladas Artesanales</div>
+                    <div class="category-overlay">Ropa hombre</div>
                 </div>
             </div>
 
             <!-- Producto 3 -->
-            <div class="col-md-3">
+            <div class="col-md-3 mb-4">
                 <div class="card border-0 shadow-lg product-card">
-                    <img src="https://www.emprenderalia.com/wp-content/uploads/Crear-una-tienda-online-en-10-pasos-3-meses-y-sin-inversion.jpg"
+                    <img src="https://carranzaycarranza.com/cdn/shop/articles/manos_joyas.jpg?v=1608258383"
                         class="card-img-top rounded-3" alt="Producto 3">
-                    <div class="category-overlay">Snacks Saludables</div>
+                    <div class="category-overlay">Accesorio</div>
                 </div>
             </div>
 
             <!-- Producto 4 -->
-            <div class="col-md-3">
+            <div class="col-md-3 mb-4">
                 <div class="card border-0 shadow-lg product-card">
-                    <img src="https://www.emprenderalia.com/wp-content/uploads/Crear-una-tienda-online-en-10-pasos-3-meses-y-sin-inversion.jpg"
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9UsXjdQCuaAROd1r-5Io7-4PwpSmjsvu_0Q&s"
                         class="card-img-top rounded-3" alt="Producto 4">
-                    <div class="category-overlay">Bebidas Artesanales</div>
+                    <div class="category-overlay">Tecnología</div>
                 </div>
             </div>
         </div>
     </div>
-
 </template>
 
 <style scoped>

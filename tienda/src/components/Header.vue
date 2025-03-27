@@ -2,59 +2,97 @@
 </script>
 
 <template>
-    <!-- Barra de navegación -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="#">La FakeZom</a>
+  <!-- Barra de navegación -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">
+        <i class="bi bi-shop-window fs-3"></i>
+      </a>
 
-    <!-- Botón de menú en móviles -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
+      <!-- Botón de menú en móviles -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-            <!--
-            routerLink: navegacion de rutas
-            routerLinkActive="active" directiva que activa los css del componente que te encuentres
-            -->
-        <li class="nav-item">
-          <a class="nav-link active" routerLink="/"  routerLinkActive="active">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/productos"  routerLinkActive="active">Productos</a>
-        </li>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-2 gap-lg-3">
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/" routerLinkActive="active">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/productos" routerLinkActive="active">Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/contacto" routerLinkActive="active">Contacto</a>
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link active" routerLink="/contacto"  routerLinkActive="active">Contacto</a>
-        </li>
-        
-        <!-- Barra de búsqueda después de "Contacto" -->
-        <li class="nav-item ms-lg-3">
-          <form class="d-flex" role="search">
-            <!--#busqueda (variable local): es parecido a un id, necesario para identificar--> 
-            <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar">
-            
-            <!--se actica cuando dan click-->
-            <button class="btn btn-outline-light" type="">
-              <i class="bi bi-search">busqueda</i> <!-- Icono de Bootstrap -->
-            </button>
-          </form>
-        </li>
-      </ul>
+          <!-- Barra de búsqueda -->
+          <li class="nav-item">
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar">
+              <button class="btn btn-outline-light" type="submit">
+                <i class="bi bi-search"></i>
+              </button>
+            </form>
+          </li>
+
+          <!-- Botones de registro e inicio de sesión -->
+<li class="nav-item d-flex align-items-center gap-2">
+  <a class="btn btn-outline-light" href="">
+    <i class="bi bi-pencil-square"></i> Registrarse
+  </a>
+  <a class="btn btn-warning" href="">
+    <i class="bi bi-key"></i> Iniciar sesión
+  </a>
+</li>
+
+
+
+          <!-- Icono de cesta de compra -->
+          <li class="nav-item">
+            <a class="nav-link position-relative text-white" href="">
+              <i class="bi bi-cart3 fs-4"></i>
+
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
-
+  </nav>
 </template>
 
 <style scoped>
-    header {
-        background-color: #333;
-        color: white;
-        text-align: center;
-        padding: 1rem;
-    }
+/* Mejoras en la navegación */
+.navbar-nav .nav-link {
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: #f8d210 !important;
+  /* Color destacado */
+}
+
+/* Forzar iconos en blanco */
+.bi-cart3,
+.bi-person-plus,
+.bi-box-arrow-in-right {
+  color: white;
+}
+
+/* Badge de la cesta de compra */
+.badge {
+  font-size: 0.8rem;
+  padding: 5px 8px;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 992px) {
+  .navbar-nav {
+    text-align: center;
+  }
+}
 </style>
