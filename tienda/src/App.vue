@@ -2,7 +2,7 @@
 import Footer from './components/Footer.vue'
 import Header from './components/Header.vue'
 import {onMounted } from 'vue'
-import {useProductsStore} from './store/productsStore'
+import {useProductsStore} from './stores/productsStore'
 
 
 const productsStore = useProductsStore()

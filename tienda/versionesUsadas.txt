@@ -13,7 +13,11 @@ En base a la categoria seleccionada, filtrar los productos que estan en el store
 
 
 
+Comando para arrancar servidor
+npm run dev
 
+Version usada: 
+La versión de Vue.js que estás usando es 3.5.13.
 
 
 
@@ -25,54 +29,7 @@ Header antiguo:
     <script setup>
 </script>
 
-<template>
-    <!-- Barra de navegación -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="#">La FakeZom</a>
 
-    <!-- Botón de menú en móviles -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-
-            <!--
-            routerLink: navegacion de rutas
-            routerLinkActive="active" directiva que activa los css del componente que te encuentres
-            -->
-        <li class="nav-item">
-          <a class="nav-link active" routerLink="/"  routerLinkActive="active">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/productos"  routerLinkActive="active">Productos</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link active" routerLink="/contacto"  routerLinkActive="active">Contacto</a>
-        </li>
-        
-        <!-- Barra de búsqueda después de "Contacto" -->
-        <li class="nav-item ms-lg-3">
-          <form class="d-flex" role="search">
-            <!--#busqueda (variable local): es parecido a un id, necesario para identificar--> 
-            <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar">
-            
-            <!--se actica cuando dan click-->
-            <button class="btn btn-outline-light" type="">
-              <i class="bi bi-search">busqueda</i> <!-- Icono de Bootstrap -->
-            </button>
-          </form>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-</template>
 
 <style scoped>
     header {
