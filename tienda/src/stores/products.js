@@ -1,38 +1,27 @@
 import { defineStore } from 'pinia';
 
 export const useProductsStore = defineStore('products', {
-  //state: defines un store con Pinia que contiene el estado y las acciones necesarias
   state: () => ({
-    products: [],// Aquí se almacenan los productos obtenidos de la API
-    categories: [],// Aquí se almacenan las categorías únicas extraídas de los productos
-    selectedCategory: null, // Categoría seleccionada por el usuario
-    loading: false, // Indica si los datos están cargando
-    error: null, // Guarda cualquier error que ocurra al obtener los datos
+    products: [], // Todos los productos
+    categories: [], // Categorías únicas
+    productsByCategory: {}, // Productos separados por categoría
+    loading: false,
+    error: null,
   }),
   actions: {
     async fetchProducts() {
-      this.loading = true; // Indica que la carga ha comenzado
-      this.error = null; // Reinicia cualquier error anterior
+      this.loading = true;
+      this.error = null;
       try {
         const response = await fetch('https://fakestoreapi.com/products');
-        this.products = await response.json(); // Guarda los productos en el estado
-        
-        this.categories = [...new Set(this.products.map((product) => product.category))]; // Extrae categorías únicas
+        this.products = await response.json();
+    
       } catch (error) {
         this.error = error;
+        console.error('Error al obtener los productos:', error);
       } finally {
-        this.loading = false; // Indica que la carga ha finalizado
+        this.loading = false;
       }
     },
   },
 });
-
-
-/*
-Explicación:
-
-    state: Aquí guardamos los datos de los productos, las categorías, la categoría seleccionada, el estado de carga y cualquier error.
-    actions: Aquí definimos funciones para obtener los productos de la API y cambiar la categoría seleccionada.
-    getters: Aquí definimos una función para filtrar los productos según la categoría seleccionada.
-
-*/
