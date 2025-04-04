@@ -1,5 +1,9 @@
 <script setup>
-const categories = ['Categoría 1', 'Categoría 2', 'Categoría 3']; // Reemplaza con tus categorías
+//const categories = ['Categoría 1', 'Categoría 2', 'Categoría 3']; // Reemplaza con tus categorías
+
+import { useProductsStore } from '../stores/products';
+const productsStore = useProductsStore();
+const categories = productsStore.categories;
 </script>
 
 <template>

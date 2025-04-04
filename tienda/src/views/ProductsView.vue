@@ -4,10 +4,10 @@ import { useProductsStore } from '../stores/products';
 import Products from '../components/Products.vue';
 import Filters from '../components/Filters.vue';
 
-const productsStore = useProductsStore();
-
+const productsStore = useProductsStore(); 
 onMounted(() => {
-  productsStore.fetchProducts();
+  productsStore.fetchProducts();//llamamos al store de productos
+
 });
 </script>
 
@@ -23,7 +23,7 @@ onMounted(() => {
         <div class="col-md-9">
           <div class="row">
             <div v-for="product in productsStore.products" :key="product.id" class="col-md-4 mb-3">
-              <Products :product="product" />
+              <Products :product="product" /> <!-- Componente para mostrar cada producto -->
             </div>
           </div>
         </div>

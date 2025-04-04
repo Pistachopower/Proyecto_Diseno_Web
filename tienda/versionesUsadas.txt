@@ -41,3 +41,7 @@ Header antiguo:
 </style>
 
 
+Logica
+Creas la view
+Luego el componente 
+URL
