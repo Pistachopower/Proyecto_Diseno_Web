@@ -2,77 +2,105 @@
 import { ref, onMounted } from 'vue';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
+import { useProductsStore } from '../stores/products';
 
-const products = ref([]);
+//Creamos una conexión al store de productos
+const productsStore = useProductsStore();
 
+// Creamos una caja (reactiva) donde vamos a guardar 3 productos destacados
+const productsDestacados = ref([]); 
+
+//onMounted: cuando el componente ya aparece en pantalla, ejecutamos esta función
 onMounted(async () => {
-  try {
-    const response = await fetch('https://fakestoreapi.com/products');
-    products.value = await response.json();
+    // 1. Esperamos que el store vaya a buscar los productos de Internet
+  await productsStore.fetchProducts(); 
 
-    // ⚠️ IMPORTANTE: Inicializar el carrusel en Vue con Bootstrap
-    import('bootstrap').then(({ Carousel }) => {
-      new Carousel(document.querySelector('#carouselExampleDark'), {
-        interval: 5000,
-        ride: 'carousel'
-      });
-    });
+    // 2. Cuando ya tenemos todos los productos, tomamos solo los primeros 3
+  productsDestacados.value = productsStore.products.slice(0, 3);
 
-  } catch (error) {
-    console.error('Error al obtener los productos:', error);
-  }
+  console.log('Productos destacados:', productsDestacados.value);
 });
 </script>
 
 <template>
-  <div id="carouselExampleDark" class="carousel carousel-dark slide mt-5" data-bs-ride="carousel">
-    
-    <!-- 🔹 Indicadores dinámicos -->
-    <div class="carousel-indicators">
-      <button v-for="(item, index) in products" :key="`indicator-${item.id}`"
-        type="button" 
-        data-bs-target="#carouselExampleDark" 
-        :data-bs-slide-to="index" 
-        :class="{ 'active': index === 0 }"
-        :aria-current="index === 0 ? 'true' : null"
-        :aria-label="`Slide ${index + 1}`">
-      </button>
-    </div>
+    <!-- Contenedor principal para darle márgenes al carrusel -->
+  <div class="carousel-container">
 
-    <!-- 🔹 Slides dinámicos -->
-    <div class="carousel-inner">
-      <div v-for="(item, index) in products" :key="item.id"
-        class="carousel-item"
-        :class="{ 'active': index === 0 }"
-        data-bs-interval="5000">
-        <img :src="item.image" class="d-block w-50 mx-auto" alt="Imagen del producto">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>{{ item.title }}</h5>
-          <p>${{ item.price }}</p>
+    <!-- Carrusel de Bootstrap -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+     
+      <!-- Parte 1: Indicadores (los botones/círculos pequeños debajo del carrusel) -->
+      <div class="carousel-indicators">
+        <!-- Recorremos los productos destacados para crear un indicador por cada uno -->
+        <button
+          v-for="(product, index) in productsDestacados"
+          :key="index"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          :data-bs-slide-to="index"
+          :class="{ active: index === 0 }"
+          :aria-current="index === 0 ? 'true' : undefined"
+          :aria-label="`Slide ${index + 1}`"
+        ></button>
+      </div>
+
+      <!-- Parte 2: Slides del carrusel (donde aparecen las imágenes) -->
+      <div class="carousel-inner">
+
+        <!-- Recorremos los productos destacados para crear un slide por cada uno -->
+        <div
+          v-for="(product, index) in productsDestacados"
+          :key="product.id"
+          :class="['carousel-item', { active: index === 0 }]"
+        >
+        
+          <!-- Imagen del producto -->
+          <img
+            :src="product.image"
+            class="d-block w-100 carousel-image"
+            :alt="product.title"
+          >
+
+          <!-- Texto sobre la imagen (título y precio) -->
+          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+            <h5>{{ product.title }}</h5>
+            <p>${{ product.price }}</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- 🔹 Controles de navegación -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Anterior</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Siguiente</span>
-    </button>
+       <!-- Botón para ir al slide anterior -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+
+      <!-- Botón para ir al siguiente slide -->
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.carousel-inner img {
-  width: 100%; /* Hace que las imágenes ocupen todo el ancho disponible */
-  max-width: 600px; /* Tamaño máximo para evitar imágenes muy grandes */
-  height: 400px; /* Tamaño fijo para mantener proporción */
-  object-fit: contain; /* Evita deformaciones */
-  margin: auto; /* Centra las imágenes */
-  display: block;
+.carousel-container {
+  margin-top: 3rem; /* Espacio arriba */
+  margin-bottom: 3rem; /* Espacio abajo */
+}
+
+.carousel-image {
+  height: 400px;
+  object-fit: contain;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1);
+  width: 3rem;
+  height: 3rem;
+  opacity: 0.8;
 }
 
 </style>

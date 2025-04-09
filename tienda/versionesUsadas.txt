@@ -45,3 +45,19 @@ Logica
 Creas la view
 Luego el componente 
 URL
+
+
+
+
+peticiones
+Agregar carouel de tres productos en el inicio
+
+Detalle del producto y dentro algunos relacionados 
+
+COMPUTED PROPERTY (PARA LA SELECCION QUE CAMBIA EN EL SELECT )
+
+Icono del carrito 
+Detalle de las compras
+eliminar producto 
+Suma total  
+
