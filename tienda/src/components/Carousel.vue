@@ -16,7 +16,7 @@ onMounted(async () => {
   await productsStore.fetchProducts(); 
 
     // 2. Cuando ya tenemos todos los productos, tomamos solo los primeros 3
-  productsDestacados.value = productsStore.products.slice(0, 3);
+  productsDestacados.value = productsStore.allProduct.slice(0, 3);
 
   console.log('Productos destacados:', productsDestacados.value);
 });

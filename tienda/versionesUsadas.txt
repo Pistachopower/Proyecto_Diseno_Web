@@ -47,9 +47,30 @@ Luego el componente
 URL
 
 
+Logica del buscador y la muestra de resultados
+Resumen del flujo:
+1. **`SearchBar`**:
+   - Filtra los productos según el texto ingresado.
+   - Guarda los productos filtrados en el store (`productosStore.setProductos`).
+
+2. **Store de Pinia (`buscar.js`)**:
+   - Guarda los productos filtrados en el estado `productos`.
+
+3. **`ProductsView`**:
+   - Obtiene los productos filtrados del store (`productos`).
+   - Pasa los productos como una prop (`results`) al componente `SearchResults`.
+
+4. **`SearchResults`**:
+   - Recibe los productos filtrados como una prop (`results`).
+   - Los muestra en el template.
+
+---
+
+Conexión clave:
+El store de Pinia (`buscar.js`) actúa como un puente entre `SearchBar` (que filtra los datos) y `SearchResults` (que muestra los datos). Esto permite que los datos sean compartidos entre componentes sin necesidad de comunicación directa entre ellos.
 
 
-peticiones
+Peticiones
 Detalle del producto y dentro algunos relacionados 
 
 COMPUTED PROPERTY (PARA LA SELECCION QUE CAMBIA EN EL SELECT )

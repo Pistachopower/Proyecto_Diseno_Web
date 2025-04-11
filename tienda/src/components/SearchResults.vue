@@ -1,52 +1,35 @@
+<script setup>
+const props = defineProps({
+  results: {
+    type: Array,
+    required: true
+  }
+});
+</script>
+
 <template>
-    <div class="search-results">
-      <div v-if="results.length">
-        <h3 class="my-4">Resultados de Productos</h3>
-        <div class="results-list">
-          <div v-for="producto in results" :key="producto.id" class="product-card">
-            <img :src="producto.image" alt="Producto" />
-            <h2>{{ producto.title }}</h2>
-            <p>{{ producto.price }} $</p>
+  <div class="container my-5">
+    <div v-if="results.length">
+      <h3 class="mb-4">Resultados de Productos</h3>
+      <div class="row">
+        <div v-for="producto in results" :key="producto.id" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+          <div class="card h-100">
+            <img :src="producto.image" class="card-img-top" alt="Producto" style="object-fit: cover; height: 200px;">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ producto.title }}</h5>
+              <p class="card-text mb-2">{{ producto.price }} $</p>
+              <button class="btn btn-success mt-auto">Ver Detalles</button>
+            </div>
           </div>
         </div>
       </div>
-      <div v-else>
-        <p>No se encontraron productos.</p>
-      </div>
     </div>
-  </template>
-  
-  <script setup>
-  const props = defineProps({
-    results: {
-      type: Array,
-      required: true
-    }
-  });
-  </script>
-  
-  <style scoped>
-  .search-results {
-    margin-top: 20px;
-  }
-  
-  .results-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
-  }
-  
-  .product-card {
-    border: 1px solid #eee;
-    padding: 1rem;
-    border-radius: 8px;
-    text-align: center;
-  }
-  
-  .product-card img {
-    max-width: 100%;
-    height: 150px;
-    object-fit: contain;
-  }
-  </style>
-  
+    <div v-else class="text-center my-5">
+      <p class="text-muted">No se encontraron productos.</p>
+    </div>
+  </div>
+
+</template>
+
+
+<style scoped></style>

@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 
-export const useProductsStore = defineStore('products', {
+export const useProductsStore = defineStore('allProduct', {
   state: () => ({
-    products: [], // Todos los productos
+    allProduct: [], // Todos los productos
     categories: [], // Categorías únicas
     productsByCategory: {}, // Productos separados por categoría
     loading: false,
@@ -14,7 +14,7 @@ export const useProductsStore = defineStore('products', {
       this.error = null;
       try {
         const response = await fetch('https://fakestoreapi.com/products');
-        this.products = await response.json();
+        this.allProduct = await response.json();
     
       } catch (error) {
         this.error = error;
