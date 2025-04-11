@@ -80,3 +80,19 @@ Detalle de las compras
 eliminar producto 
 Suma total  
 
+
+
+Glosario
+
+Pinia (libreria para comunicarse entre componentes): libreria para manejar estados (datos que quieres guardar y compartir entre componentes)
+
+Props: datos que un componente hijo recibe de su padre. Ej: ProductsViews como padre le pasa a SearchResults los productos filtrados. 
+
+Store
+State: donde guardas los datos. Ej: lista de productos
+
+Actions: funciones para cambiar esos datos. Ej: agregarm limpiar un carrito
+
+Getters: computa o filtra datos de forma automatica. Ej: contar los productos en el carrito
+
+
