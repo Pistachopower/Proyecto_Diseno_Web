@@ -14,7 +14,8 @@ const routes = [
   {
     path: '/products', 
     name: 'Products',
-    component: ProductsView },
+    component: ProductsView 
+  },
 
 ];
 
