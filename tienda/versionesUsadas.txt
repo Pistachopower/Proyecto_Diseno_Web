@@ -77,7 +77,6 @@ COMPUTED PROPERTY (PARA LA SELECCION QUE CAMBIA EN EL SELECT )
 
 Icono del carrito 
 Detalle de las compras
-eliminar producto 
 Suma total  
 
 

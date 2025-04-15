@@ -3,15 +3,14 @@ import { useRoute } from 'vue-router';
 import { useProductsStore } from '@/stores/products';
 import { storeToRefs } from 'pinia';
 
-// Obtenemos el ID del producto desde la URL
-const route = useRoute();
-const productId = route.params.id;
 
-// Accedemos al store de productos
-const productsStore = useProductsStore();
-const { allProduct } = storeToRefs(productsStore);
+const route = useRoute(); // Accede a la ruta actual
+const productId = route.params.id; // Saca el ID del producto de la URL
 
-// Buscamos el producto en la lista de productos
+const productsStore = useProductsStore(); // Accedemos al store
+const { allProduct } = storeToRefs(productsStore); // Sacamos la lista de productos
+
+// Buscamos el producto en la lista de productos con el ID de la URL
 const product = allProduct.value.find(p => p.id === parseInt(productId));
 </script>
 
