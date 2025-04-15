@@ -10,7 +10,7 @@ export const useCartStore = defineStore('cart', {
       this.cartItems.push(product);
     },
     removeFromCart(productId) {
-      // Elimina un producto del carrito por su ID
+      // Elimina un producto del carrito por su ID(guarda los productos que no coinciden y deja fuera el que quieres eliminar)
       this.cartItems = this.cartItems.filter(item => item.id !== productId);
     },
   },

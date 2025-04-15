@@ -62,7 +62,13 @@ const addToCart = (producto) => {
             <div class="card h-100">
               <img :src="producto.image" class="card-img-top" alt="Producto" style="object-fit: cover; height: 200px;">
               <div class="card-body d-flex flex-column">
+
+                <router-link :to="`/product/${producto.id}`">
+
                 <h5 class="card-title">{{ producto.title }}</h5>
+              </router-link>
+
+
                 <p class="card-text mb-2">{{ producto.price }} $</p>
                 <button class="btn btn-primary mt-auto" @click="addToCart(producto)">Añadir al carrito</button>
               </div>
