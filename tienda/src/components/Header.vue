@@ -43,11 +43,14 @@
             </a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link position-relative text-white" href="">
-              <i class="bi bi-cart3 fs-4"></i>
-            </a>
-          </li>
+      <!-- Ícono del carrito -->
+      <li class="nav-item">
+          <router-link class="nav-link position-relative text-white" to="/cart">
+            <i class="bi bi-cart3 fs-4"></i>
+          </router-link>
+        </li>
+
+
         </ul>
       </div>
     </div>
