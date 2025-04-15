@@ -4,6 +4,7 @@ import SearchResults from '@/components/SearchResults.vue';
 
 import { listaProductos } from '@/stores/buscar';
 import { useProductsStore } from '@/stores/products';
+import { useCartStore } from '@/stores/cart'; 
 
 import { storeToRefs } from 'pinia';
 
@@ -15,7 +16,8 @@ const allProductsStore = useProductsStore();
 //guardamos los productos de la API en el store
 const { allProduct } = storeToRefs(allProductsStore);
 
-
+// Hacemos el enlace con el store del carrito
+const cartStore = useCartStore();
 
 onMounted(() => {
   allProductsStore.fetchProducts();
@@ -33,6 +35,15 @@ const productosStore = listaProductos();
 
 //aqui guardamos los productos filtrados para pasarselos al componente SearchResults
 const { productos } = storeToRefs(productosStore);  
+
+
+// Función para añadir un producto al carrito
+const addToCart = (producto) => {
+  cartStore.addToCart(producto); // Llama a la acción del store
+  console.log('Producto añadido al carrito:', producto);
+};
+
+
 </script>
 
 
@@ -53,7 +64,7 @@ const { productos } = storeToRefs(productosStore);
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">{{ producto.title }}</h5>
                 <p class="card-text mb-2">{{ producto.price }} $</p>
-                <button class="btn btn-primary mt-auto">Comprar</button>
+                <button class="btn btn-primary mt-auto" @click="addToCart(producto)">Añadir al carrito</button>
               </div>
             </div>
           </div>
