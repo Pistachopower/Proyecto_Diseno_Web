@@ -3,6 +3,8 @@ import { useRoute } from 'vue-router';
 import { useProductsStore } from '@/stores/products';
 import { storeToRefs } from 'pinia';
 
+import ProductosRelacionados from '@/components/ProductosRelacionados.vue';
+
 
 const route = useRoute(); // Accede a la ruta actual
 const productId = route.params.id; // Saca el ID del producto de la URL
@@ -21,6 +23,9 @@ const product = allProduct.value.find(p => p.id === parseInt(productId));
       <img :src="product.image" alt="Imagen del producto" class="img-fluid mb-4" />
       <p>{{ product.description }}</p>
       <p class="fw-bold">Precio: ${{ product.price }}</p>
+    
+    <!-- Componente de productos relacionados -->
+    <ProductosRelacionados :categoria="product.category" />
     </div>
     <div v-else>
       <p>Producto no encontrado.</p>
