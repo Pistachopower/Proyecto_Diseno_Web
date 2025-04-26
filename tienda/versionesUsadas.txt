@@ -16,6 +16,10 @@ En base a la categoria seleccionada, filtrar los productos que estan en el store
 Comando para arrancar servidor
 npm run dev
 
+
+Instalar 
+npm install bootstrap
+
 Version usada: 
 La versión de Vue.js que estás usando es 3.5.13.
 
@@ -96,4 +100,11 @@ Getters: computa o filtra datos de forma automatica. Ej: contar los productos en
 
 Computed: es reactivo, es decir que puede hacer cambios de una estructura de datos cada
 vez que se cambia algo. 
+
+Ref(): es una función de Vue que crea una variable reactiva.
+Una variable reactiva es aquella que Vue vigila automáticamente, y cuando 
+su valor cambia, Vue actualiza el contenido del HTML donde se esté usando
+
+onMounted() ejecuta un bloque de código cuando el componente ya se mostró en pantalla, 
+ideal para inicializar datos o hacer tareas al arrancar. 
 
