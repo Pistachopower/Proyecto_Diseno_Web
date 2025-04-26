@@ -1,0 +1,103 @@
+Resumen del funcionamiento del modal y su conexión con el header
+1. Función del modal (UserModal.vue)
+El modal permite al usuario configurar su perfil ingresando un nombre y seleccionando un avatar. Estos datos se guardan en el localStorage y se utilizan para personalizar el header.
+
+Flujo del modal:
+Mostrar el modal automáticamente:
+
+En el onMounted, se verifica si los datos (userName y userAvatar) están guardados en el localStorage.
+Si no están presentes, el modal se muestra automáticamente usando bootstrap.Modal.
+
+
+onMounted(() => {
+  const storedName = localStorage.getItem('userName');
+  const storedAvatar = localStorage.getItem('userAvatar');
+
+  if (!storedName || !storedAvatar) {
+    const modal = new bootstrap.Modal(document.getElementById('userModal'), {
+      backdrop: 'static', // Evita que el usuario cierre el modal haciendo clic fuera
+      keyboard: false, // Evita que el usuario cierre el modal con la tecla Esc
+    });
+    modal.show();
+  }
+});
+
+Guardar los datos del usuario:
+
+Cuando el usuario hace clic en el botón "Guardar", se valida que haya ingresado un nombre y seleccionado un avatar.
+Los datos (userName, userAvatar y isLoggedIn) se guardan en el localStorage.
+El modal se cierra y la página se recarga para reflejar los cambios en el header.
+
+const saveUserData = () => {
+  if (userName.value.trim() === '' || selectedAvatar.value === '') {
+    alert('Por favor, ingresa tu nombre y selecciona un avatar.');
+    return;
+  }
+
+  localStorage.setItem('userName', userName.value);
+  localStorage.setItem('userAvatar', selectedAvatar.value);
+  localStorage.setItem('isLoggedIn', 'true'); // Marca al usuario como logueado
+
+  const modal = bootstrap.Modal.getInstance(document.getElementById('userModal'));
+  modal.hide();
+
+  window.location.reload(); // Recargar la página para reflejar los cambios
+};
+
+2. Conexión con el header (Header.vue)
+El header utiliza los datos guardados en el localStorage para personalizar la experiencia del usuario.
+
+Flujo del header:
+Cargar los datos del usuario:
+
+En el onMounted, se recuperan los datos (userName, userAvatar y isLoggedIn) desde el localStorage.
+Si el usuario está logueado (isLoggedIn es true), se muestran el nombre, el avatar y el botón de "Cerrar sesión".
+Si no está logueado, se muestran los botones de "Registrarse" e "Iniciar sesión".
+
+
+onMounted(() => {
+  userName.value = localStorage.getItem('userName') || 'Invitado';
+  userAvatar.value = localStorage.getItem('userAvatar') || '';
+  isLoggedIn.value = !!localStorage.getItem('isLoggedIn'); // Verifica si el usuario está logueado
+});
+
+
+Cerrar sesión:
+
+Cuando el usuario hace clic en "Cerrar sesión", se eliminan los datos del localStorage y se actualizan las variables reactivas.
+La página se recarga para mostrar nuevamente el modal.
+
+const logout = () => {
+  localStorage.removeItem('isLoggedIn');
+  localStorage.removeItem('userName');
+  localStorage.removeItem('userAvatar');
+  isLoggedIn.value = false;
+  userName.value = 'Invitado';
+  userAvatar.value = '';
+
+  window.location.reload(); // Recargar la página para mostrar el modal nuevamente
+};
+
+3. Interacción entre el modal y el header
+Cuando el usuario guarda los datos en el modal:
+
+Los datos (userName, userAvatar, isLoggedIn) se guardan en el localStorage.
+El header detecta estos datos en el onMounted y actualiza su contenido para mostrar el nombre, el avatar y el botón de "Cerrar sesión".
+Cuando el usuario cierra sesión desde el header:
+
+Los datos del localStorage se eliminan.
+La página se recarga, y el modal se muestra automáticamente porque no hay datos guardados.
+
+4. Resultado esperado
+Al cargar la página por primera vez:
+
+Si no hay datos en el localStorage, el modal aparece automáticamente.
+El usuario debe ingresar su nombre y seleccionar un avatar para continuar.
+Después de guardar los datos:
+
+El header muestra el nombre del usuario, el avatar y el botón de "Cerrar sesión".
+Los botones de "Registrarse" e "Iniciar sesión" desaparecen.
+Al cerrar sesión:
+
+El header vuelve a mostrar los botones de "Registrarse" e "Iniciar sesión".
+El modal aparece automáticamente al recargar la página.
