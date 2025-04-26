@@ -94,4 +94,6 @@ Actions: funciones para cambiar esos datos. Ej: agregarm limpiar un carrito
 
 Getters: computa o filtra datos de forma automatica. Ej: contar los productos en el carrito
 
+Computed: es reactivo, es decir que puede hacer cambios de una estructura de datos cada
+vez que se cambia algo. 
 

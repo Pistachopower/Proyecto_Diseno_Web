@@ -23,14 +23,17 @@ const product = allProduct.value.find(p => p.id === parseInt(productId));
       <img :src="product.image" alt="Imagen del producto" class="img-fluid mb-4" />
       <p>{{ product.description }}</p>
       <p class="fw-bold">Precio: ${{ product.price }}</p>
-    
-    <!-- Componente de productos relacionados -->
-    <ProductosRelacionados :categoria="product.category" />
     </div>
+
     <div v-else>
       <p>Producto no encontrado.</p>
     </div>
+
+       <!-- Componente de productos relacionados -->
+   <ProductosRelacionados :categoria="product.category" />
   </div>
+
+
 </template>
 
 <style scoped>

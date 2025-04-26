@@ -1,0 +1,33 @@
+Lógica de productos relacionados
+ProductDetailView.vue 
+1- Se tina el id del producto desde la url usando useRouter()
+
+2- Se busca en la lista allProduct, el producto con ese id
+
+3- Una vez encontrado, se saca la categiría del producto. 
+    const product = allProduct.value.find(p => p.id === parseInt(productId));
+
+4- En esta parte del código de la template: 
+       <ProductosRelacionados :categoria="product.category" />
+    pasamos el valor o texto de la categiría al componente ProductosRelacionados.vue
+
+ProductosRelacionados.vue
+5- Se recibe la propiedad categoría: 
+        const props = defineProps({
+          categoria: {
+            type: String,
+            required: true, // La categoría es obligatoria
+          },
+        });
+
+    
+6- Usamos computed para filtrar la lista allProduct(proveniente de la store)
+y guarda sólo los productos que tienen esa misma categoría.
+
+7- Guardamos los productos relacionados en:
+    const productosRelacionados = computed(() =>
+  allProduct.value.filter(producto => producto.category === props.categoria)
+);
+
+8- Con la directiva v-for recorremos los productosRelacionados y 
+mostramos sus atributos.

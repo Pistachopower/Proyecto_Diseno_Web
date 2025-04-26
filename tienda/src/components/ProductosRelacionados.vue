@@ -12,8 +12,8 @@ const props = defineProps({
 
 console.log('Categoría recibida:', props.categoria);
 
-const productsStore = useProductsStore();
-const { allProduct } = storeToRefs(productsStore);
+const productsStore = useProductsStore(); //llama al store
+const { allProduct } = storeToRefs(productsStore); // Sacamos la lista de productos
 
 // Filtramos los productos que coinciden con la categoría
 const productosRelacionados = computed(() =>
