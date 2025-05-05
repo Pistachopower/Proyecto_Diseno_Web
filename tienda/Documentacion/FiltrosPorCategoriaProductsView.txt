@@ -1,44 +1,25 @@
-1. ¿Qué queremos hacer?
-Queremos que en la página de productos el usuario pueda:
+¿Qué queremos hacer?
+Queremos que:
 
-Ver botones con las categorías disponibles.
-Hacer clic en una categoría para mostrar solo los productos que pertenecen a esa categoría.
-Tener un botón "Todas" para mostrar todos los productos.
+Las categorías de los productos se obtengan dinámicamente desde el JSON de productos.
+Los botones de categorías se generen automáticamente según las categorías disponibles.
+Los productos se filtren por categoría cuando el usuario haga clic en un botón.
 
-2. ¿Cómo lo hicimos?
+¿Cómo lo hicimos?
 Paso 1: Obtener las categorías dinámicamente
-
-¿De dónde vienen las categorías?
-Las categorías se obtienen de los productos que ya tienes en el store (que es como una base de datos en tu aplicación).
-Usamos un método en el store para extraer las categorías únicas de los productos.
-
-Paso 2: Crear una variable para guardar los productos filtrados
-Creamos una variable llamada filteredProducts que guarda los productos que queremos mostrar en la página.
-
-Al principio, esta variable contiene todos los productos.
-
-Paso 3: Crear botones para las categorías
-Mostramos un botón para cada categoría.
-También añadimos un botón "Todas" para mostrar todos los productos.
-
-Paso 4: Filtrar los productos
-Cuando el usuario hace clic en un botón de categoría, filtramos los productos que pertenecen a esa categoría.
-Si el usuario hace clic en "Todas", mostramos todos los productos
-
-3. Código explicado:
-a) Obtener las categorías
-En el store de productos (products.js), usamos un método para obtener las categorías únicas de los productos:
+En el store de productos (products.js), usamos un método para extraer las categorías únicas de los productos.
+Esto se hace con el siguiente código:
 
 this.categories = [...new Set(this.allProduct.map(product => product.category))];
 
-¿Qué hace esto?
+¿Qué hace este código?
 this.allProduct.map(product => product.category) toma todas las categorías de los productos.
-
 new Set(...) elimina las categorías duplicadas.
-[...] convierte el resultado en un array.
+[...new Set(...)] convierte el resultado en un array.
 
-b) Crear botones para las categorías
-En el archivo ProductsView.vue, usamos un v-for para recorrer las categorías y crear un botón para cada una:
+Paso 2: Crear botones para las categorías
+
+En ProductsView.vue, usamos un v-for para recorrer las categorías y crear un botón para cada una:
 
 <button
   v-for="category in categories"
@@ -50,31 +31,23 @@ En el archivo ProductsView.vue, usamos un v-for para recorrer las categorías y 
   {{ category }}
 </button>
 
-¿Qué hace esto?
+¿Qué hace este código?
 v-for="category in categories" recorre todas las categorías y crea un botón para cada una.
-
 @click="filterByCategory(category)" llama a la función filterByCategory cuando haces clic en un botón.
-
 :class="{ active: selectedCategory === category }" resalta el botón de la categoría seleccionada.
 
-c) Filtrar los productos
+Paso 3: Filtrar los productos
 Creamos una función llamada filterByCategory que filtra los productos según la categoría seleccionada:
 
 const filterByCategory = (category) => {
-  selectedCategory.value = category;
-  filteredProducts.value = category
-    ? allProduct.value.filter(product => product.category === category)
-    : allProduct.value; // Si no hay categoría seleccionada, mostramos todos los productos
+  selectedCategory.value = category; // Actualiza la categoría seleccionada
 };
 
-¿Qué hace esto?
-selectedCategory.value = category guarda la categoría seleccionada.
+¿Qué hace este código?
+Guarda la categoría seleccionada en la variable selectedCategory.
+Esto recalcula automáticamente los productos filtrados.
 
-Si hay una categoría seleccionada, usamos filter para mostrar solo los productos de esa categoría.
-
-Si no hay categoría seleccionada (botón "Todas"), mostramos todos los productos.
-
-d) Mostrar los productos filtrados
+Paso 4: Mostrar los productos filtrados
 En el template, usamos filteredProducts para mostrar los productos:
 
 <div v-for="producto in filteredProducts" :key="producto.id" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
@@ -85,16 +58,15 @@ En el template, usamos filteredProducts para mostrar los productos:
         <h5 class="card-title">{{ producto.title }}</h5>
       </router-link>
       <p class="card-text mb-2">${{ producto.price }}</p>
-      <button class="btn btn-primary mt-auto" @click="addToCart(producto)">Añadir al carrito</button>
     </div>
   </div>
 </div>
 
-¿Qué hace esto?
+¿Qué hace este código?
 v-for="producto in filteredProducts" recorre los productos filtrados y los muestra en tarjetas.
-Cada tarjeta tiene el título, la imagen, el precio y un botón para añadir al carrito.
+Cada tarjeta tiene el título, la imagen y el precio del producto.
 
-4. ¿Cómo funciona todo junto?
+¿Cómo funciona todo junto?
 Al cargar la página:
 
 Se obtienen los productos y las categorías desde el store.
@@ -107,7 +79,7 @@ Cuando haces clic en "Todas":
 
 filteredProducts vuelve a contener todos los productos.
 
-5. Resultado esperado
+Resultado esperado
 En la página de productos:
 
 Aparecen botones con las categorías dinámicamente generadas desde los productos.
@@ -118,4 +90,3 @@ Solo se muestran los productos que pertenecen a esa categoría.
 Al hacer clic en "Todas":
 
 Se muestran todos los productos disponibles.
-

@@ -1,50 +1,49 @@
 <script setup>
 import SearchBar from '@/components/SearchBar.vue';
-import SearchResults from '@/components/SearchResults.vue';
-
 import { useProductsStore } from '@/stores/products';
-import { useCartStore } from '@/stores/cart'; 
 import { storeToRefs } from 'pinia';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 
 // Hacemos el enlace con el store de productos
 const productsStore = useProductsStore();
 const { allProduct, categories } = storeToRefs(productsStore);
 
-// Variable reactiva para la categoría seleccionada
+// Variables reactivas para el texto de búsqueda y la categoría seleccionada
+const textoBusqueda = ref('');
 const selectedCategory = ref(''); // '' significa "todas las categorías"
 
 // Variable reactiva para los productos filtrados
-const filteredProducts = ref([]);
+const filteredProducts = computed(() => {
+  // Filtrar por categoría
+  let productosFiltrados = selectedCategory.value
+    ? allProduct.value.filter(product => product.category === selectedCategory.value)
+    : allProduct.value;
 
-// Hacemos el enlace con el store del carrito
-const cartStore = useCartStore();
+  // Filtrar por texto de búsqueda
+  if (textoBusqueda.value.trim()) {
+    productosFiltrados = productosFiltrados.filter(product =>
+      product.title.toLowerCase().includes(textoBusqueda.value.toLowerCase())
+    );
+  }
+
+  return productosFiltrados;
+});
 
 // Cargar los productos y categorías al montar el componente
 onMounted(async () => {
   await productsStore.fetchProducts(); // Carga los productos desde la API
-  filteredProducts.value = allProduct.value; // Inicialmente mostramos todos los productos
 });
 
 // Función para filtrar productos por categoría
 const filterByCategory = (category) => {
-  selectedCategory.value = category;
-  filteredProducts.value = category
-    ? allProduct.value.filter(product => product.category === category)
-    : allProduct.value; // Si no hay categoría seleccionada, mostramos todos los productos
-};
-
-// Función para añadir un producto al carrito
-const addToCart = (producto) => {
-  cartStore.addToCart(producto); // Llama a la acción del store
-  console.log('Producto añadido al carrito:', producto);
+  selectedCategory.value = category; // Actualiza la categoría seleccionada
 };
 </script>
 
 <template>
   <div>
     <!-- Barra de búsqueda -->
-    <SearchBar />
+    <SearchBar v-model:search="textoBusqueda" />
 
     <!-- Botones de categorías -->
     <div class="container my-4">
@@ -86,9 +85,6 @@ const addToCart = (producto) => {
                 <h5 class="card-title">{{ producto.title }}</h5>
               </router-link>
               <p class="card-text mb-2">${{ producto.price }}</p>
-              <button class="btn btn-primary mt-auto" @click="addToCart(producto)">
-                Añadir al carrito
-              </button>
             </div>
           </div>
         </div>
@@ -99,7 +95,7 @@ const addToCart = (producto) => {
 
 <style scoped>
 button.active {
-  background-color: #c49c16;
+  background-color: #0d6efd;
   color: white;
 }
 </style>
