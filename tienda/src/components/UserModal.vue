@@ -13,6 +13,23 @@ const avatars = [
   'https://cdn-icons-png.flaticon.com/512/924/924915.png',
 ];
 
+// Mostrar el modal automáticamente si no hay datos en localStorage
+onMounted(() => {
+  
+  const storedName = localStorage.getItem('userName');
+  const storedAvatar = localStorage.getItem('userAvatar');
+
+  // Si no hay nombre o avatar guardado, mostrar el modal
+  if (!storedName || !storedAvatar) {
+    const modal = new bootstrap.Modal(document.getElementById('userModal'), {
+      backdrop: 'static', // Evita que el usuario cierre el modal haciendo clic fuera
+      keyboard: false, // Evita que el usuario cierre el modal con la tecla Esc
+    });
+    modal.show();
+  }
+});
+
+
 // Función para guardar los datos en localStorage
 const saveUserData = () => {
   if (userName.value.trim() === '' || selectedAvatar.value === '') {
@@ -33,19 +50,7 @@ const saveUserData = () => {
   window.location.reload();
 };
 
-// Mostrar el modal automáticamente si no hay datos en localStorage
-onMounted(() => {
-  const storedName = localStorage.getItem('userName');
-  const storedAvatar = localStorage.getItem('userAvatar');
 
-  if (!storedName || !storedAvatar) {
-    const modal = new bootstrap.Modal(document.getElementById('userModal'), {
-      backdrop: 'static', // Evita que el usuario cierre el modal haciendo clic fuera
-      keyboard: false, // Evita que el usuario cierre el modal con la tecla Esc
-    });
-    modal.show();
-  }
-});
 </script>
 
 <template>

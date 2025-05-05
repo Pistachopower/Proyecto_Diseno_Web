@@ -1,0 +1,9 @@
+Carousel
+Obtenemos los productos destacado en: const productsDestacados = ref([]); que proviene de la store. 
+
+
+En la template usamos router link: <router-link :to="`/product/${product.id}`"> para crear una URL como /product/1, /product/2, etc.
+
+Pasamos el id al index con el id del producto (en las rutas)
+
+Lo trasladamos al componente DetalleProducto

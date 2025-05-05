@@ -15,7 +15,9 @@ export const useProductsStore = defineStore('allProduct', {
       try {
         const response = await fetch('https://fakestoreapi.com/products');
         this.allProduct = await response.json();
-    
+
+        // Extraer categorías únicas
+        this.categories = [...new Set(this.allProduct.map(product => product.category))];
       } catch (error) {
         this.error = error;
         console.error('Error al obtener los productos:', error);

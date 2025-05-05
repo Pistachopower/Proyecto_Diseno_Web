@@ -74,14 +74,7 @@ Conexión clave:
 El store de Pinia (`buscar.js`) actúa como un puente entre `SearchBar` (que filtra los datos) y `SearchResults` (que muestra los datos). Esto permite que los datos sean compartidos entre componentes sin necesidad de comunicación directa entre ellos.
 
 
-Peticiones
-Detalle del producto y dentro algunos relacionados 
 
-COMPUTED PROPERTY (PARA LA SELECCION QUE CAMBIA EN EL SELECT )
-
-Icono del carrito 
-Detalle de las compras
-Suma total  
 
 
 
@@ -108,3 +101,17 @@ su valor cambia, Vue actualiza el contenido del HTML donde se esté usando
 onMounted() ejecuta un bloque de código cuando el componente ya se mostró en pantalla, 
 ideal para inicializar datos o hacer tareas al arrancar. 
 
+Two-way Binding: Si tú escribes algo → cambia la variable en el código. Si el código cambia la variable → se actualiza lo que ves en pantalla.
+
+Requisitos: 
+Buenos días Nelson,
+te adjunto los comentarios del proyecto:
+
+    En inicio enlazar los productos del carrusel con el detalle del producto. (X)
+    En la página de productos, añadir filtros por categorías y que el buscador busque a medida que se escribe.
+    Las categorías debes cogerlas dinámicamente desde el json de productos.
+    Al añadir un producto al carro, añadir algún tipo de animacioń o feedback para que el usuario sepa que se ha añadido.
+    En el icono del carro puedes usar un Bagde de Bootstrap (https://getbootstrap.com/docs/5.3/components/badge/)
+    Mejorar la visualización cuando se muestra un producto y añadir un botón para añadir al carro, que en la vista de detalle no está.
+    En la página del carro, listar los productos y hacer la suma total del pedido. Puedes ver un ejemplo en la imagen adjunta.
+    No hace falta que añadas los botones de Añadir/quitar productos.

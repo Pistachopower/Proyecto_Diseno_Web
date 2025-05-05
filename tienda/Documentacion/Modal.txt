@@ -1,6 +1,7 @@
 Resumen del funcionamiento del modal y su conexión con el header
 1. Función del modal (UserModal.vue)
-El modal permite al usuario configurar su perfil ingresando un nombre y seleccionando un avatar. Estos datos se guardan en el localStorage y se utilizan para personalizar el header.
+El modal permite al usuario configurar su perfil ingresando un nombre y seleccionando un avatar. 
+Estos datos se guardan en el localStorage y se utilizan para personalizar el header.
 
 Flujo del modal:
 Mostrar el modal automáticamente:
@@ -83,8 +84,8 @@ Cuando el usuario guarda los datos en el modal:
 
 Los datos (userName, userAvatar, isLoggedIn) se guardan en el localStorage.
 El header detecta estos datos en el onMounted y actualiza su contenido para mostrar el nombre, el avatar y el botón de "Cerrar sesión".
-Cuando el usuario cierra sesión desde el header:
 
+Cuando el usuario cierra sesión desde el header:
 Los datos del localStorage se eliminan.
 La página se recarga, y el modal se muestra automáticamente porque no hay datos guardados.
 
