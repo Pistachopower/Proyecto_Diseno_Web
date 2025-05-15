@@ -1,6 +1,7 @@
 <script setup>
 import SearchBar from '@/components/SearchBar.vue';
-import { useProductsStore } from '@/stores/products';
+import { useProductsStore} from '@/stores/products';
+import { useCartStore } from '@/stores/cart';
 import { storeToRefs } from 'pinia';
 import { ref, onMounted, computed } from 'vue';
 
@@ -34,10 +35,26 @@ onMounted(async () => {
   await productsStore.fetchProducts(); // Carga los productos desde la API
 });
 
+
+//IMPLEMENTACION DEL TOAST DE BOOTSTRAP POR PROBAR
 // Función para filtrar productos por categoría
 const filterByCategory = (category) => {
   selectedCategory.value = category; // Actualiza la categoría seleccionada
 };
+
+const cartStore = useCartStore();
+const showToast = ref(false); // Controla si el Toast se muestra o no
+
+// Función para añadir un producto al carrito
+const addToCart = (producto) => {
+  cartStore.addToCart(producto); // Añade el producto al carrito
+  showToast.value = true; // Muestra el Toast
+  setTimeout(() => {
+    showToast.value = false; // Oculta el Toast después de 3 segundos
+  }, 3000);
+};
+
+
 </script>
 
 <template>
@@ -91,6 +108,59 @@ const filterByCategory = (category) => {
       </div>
     </div>
   </div>
+
+
+
+  <!-- Toast de Bootstrap -->
+  <div>
+    <!-- Lista de productos -->
+    <div class="container my-4">
+      <div class="row">
+        <div
+          v-for="producto in allProduct"
+          :key="producto.id"
+          class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
+        >
+          <div class="card h-100">
+            <img
+              :src="producto.image"
+              class="card-img-top"
+              alt="Producto"
+              style="object-fit: cover; height: 200px;"
+            />
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ producto.title }}</h5>
+              <p class="card-text mb-2">${{ producto.price }}</p>
+              <button class="btn btn-primary mt-auto" @click="addToCart(producto)">
+                Añadir al carrito
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast de confirmación -->
+    <div
+      class="toast-container position-fixed bottom-0 end-0 p-3"
+      style="z-index: 11"
+      v-if="showToast"
+    >
+      <div class="toast align-items-center text-white bg-success border-0" role="alert">
+        <div class="d-flex">
+          <div class="toast-body">
+            Producto añadido al carrito.
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            @click="showToast = false"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <style scoped>

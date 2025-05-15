@@ -1,5 +1,12 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+//Se importa para el Badge del carrito
+import { useCartStore } from '@/stores/cart';
+import { storeToRefs } from 'pinia';
+
+const cartStore = useCartStore();
+const { cartItems } = storeToRefs(cartStore); // Obtenemos los productos del carrito
+
 
 const userName = ref('');
 const userAvatar = ref('');
@@ -24,6 +31,9 @@ const logout = () => {
   // Recargar la página para mostrar el modal nuevamente
   window.location.reload();
 };
+
+
+
 </script>
 
 <template>
@@ -84,6 +94,28 @@ const logout = () => {
         </ul>
       </div>
     </div>
+
+
+
+
+          <!-- Menú de navegación POR PROBAR -->
+          <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-2 gap-lg-3">
+          <!-- Ícono del carrito con Badge -->
+          <li class="nav-item position-relative">
+            <router-link class="nav-link position-relative text-white" to="/cart">
+              <i class="bi bi-cart3 fs-4"></i>
+              <!-- Badge para mostrar la cantidad de productos -->
+              <span
+                v-if="cartItems.length > 0"
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              >
+                {{ cartItems.length }}
+              </span>
+            </router-link>
+          </li>
+        </ul>
+      </div>
   </nav>
 </template>
 
@@ -91,5 +123,9 @@ const logout = () => {
 /* Estilo para el avatar */
 .rounded-circle {
   border: 2px solid white;
+}
+
+.badge {
+  font-size: 0.8rem;
 }
 </style>

@@ -1,0 +1,167 @@
+Queremos que cuando el usuario añada un producto al carrito:
+
+Reciba un feedback visual (como un mensaje o animación).
+El icono del carrito muestre un contador con la cantidad de productos en el carrito usando un Badge de Bootstrap.
+
+¿Qué vamos a hacer?
+Mostrar un Badge en el icono del carrito que indique cuántos productos hay en el carrito.
+Mostrar un mensaje de confirmación (como un Toast de Bootstrap) cuando se añada un producto al carrito.
+
+
+Implementación
+Paso 1: Modificar el Header para mostrar el Badge
+En el archivo Header.vue, añadimos un Badge al icono del carrito para mostrar la cantidad de productos en el carrito.
+
+<script setup>
+import { useCartStore } from '@/stores/cart';
+import { storeToRefs } from 'pinia';
+
+const cartStore = useCartStore();
+const { cartItems } = storeToRefs(cartStore); // Obtenemos los productos del carrito
+</script>
+
+<template>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand fw-bold" href="#">
+        <i class="bi bi-shop-window fs-3"></i>
+      </a>
+
+      <!-- Botón para colapsar el menú en pantallas pequeñas -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Menú de navegación -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-2 gap-lg-3">
+          <!-- Ícono del carrito con Badge -->
+          <li class="nav-item position-relative">
+            <router-link class="nav-link position-relative text-white" to="/cart">
+              <i class="bi bi-cart3 fs-4"></i>
+              <!-- Badge para mostrar la cantidad de productos -->
+              <span
+                v-if="cartItems.length > 0"
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              >
+                {{ cartItems.length }}
+              </span>
+            </router-link>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</template>
+
+<style scoped>
+.badge {
+  font-size: 0.8rem;
+}
+</style>
+
+¿Qué hace este código?
+cartItems.length muestra la cantidad de productos en el carrito.
+Si el carrito tiene productos (cartItems.length > 0), se muestra un Badge rojo con el número de productos.
+
+Paso 2: Mostrar un Toast al añadir un producto
+En el archivo ProductsView.vue, añadimos un Toast de Bootstrap para mostrar un mensaje de confirmación cuando se añada un producto al carrito.
+
+<script setup>
+import { useCartStore } from '@/stores/cart';
+import { ref } from 'vue';
+
+const cartStore = useCartStore();
+const showToast = ref(false); // Controla si el Toast se muestra o no
+
+// Función para añadir un producto al carrito
+const addToCart = (producto) => {
+  cartStore.addToCart(producto); // Añade el producto al carrito
+  showToast.value = true; // Muestra el Toast
+  setTimeout(() => {
+    showToast.value = false; // Oculta el Toast después de 3 segundos
+  }, 3000);
+};
+</script>
+
+<template>
+  <div>
+    <!-- Lista de productos -->
+    <div class="container my-4">
+      <div class="row">
+        <div
+          v-for="producto in allProduct"
+          :key="producto.id"
+          class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
+        >
+          <div class="card h-100">
+            <img
+              :src="producto.image"
+              class="card-img-top"
+              alt="Producto"
+              style="object-fit: cover; height: 200px;"
+            />
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ producto.title }}</h5>
+              <p class="card-text mb-2">${{ producto.price }}</p>
+              <button class="btn btn-primary mt-auto" @click="addToCart(producto)">
+                Añadir al carrito
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast de confirmación -->
+    <div
+      class="toast-container position-fixed bottom-0 end-0 p-3"
+      style="z-index: 11"
+      v-if="showToast"
+    >
+      <div class="toast align-items-center text-white bg-success border-0" role="alert">
+        <div class="d-flex">
+          <div class="toast-body">
+            Producto añadido al carrito.
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            @click="showToast = false"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+¿Qué hace este código?
+addToCart(producto) añade el producto al carrito y muestra el Toast.
+showToast.value = true muestra el Toast.
+setTimeout oculta el Toast automáticamente después de 3 segundos.
+
+Resultado esperado
+Badge en el icono del carrito:
+
+El icono del carrito muestra un número que indica cuántos productos hay en el carrito.
+Si el carrito está vacío, el Badge no se muestra.
+Toast de confirmación:
+
+Cuando el usuario añade un producto al carrito, aparece un mensaje en la esquina inferior derecha que dice: "Producto añadido al carrito".
+El mensaje desaparece automáticamente después de 3 segundos.
+
+Conclusión
+Badge en el carrito:
+
+El número en el icono del carrito se actualiza automáticamente cada vez que añades un producto.
+Esto se hace usando una variable (cartItems.length) que cuenta los productos en el carrito.
+Toast de confirmación:
+
+Cuando haces clic en "Añadir al carrito", aparece un mensaje que confirma que el producto se añadió.
+Este mensaje desaparece solo después de unos segundos.
+¿Por qué funciona?
+
+Vue es reactivo, lo que significa que cualquier cambio en los datos (como añadir un producto al carrito) actualiza automáticamente lo que ves en la página.
+
