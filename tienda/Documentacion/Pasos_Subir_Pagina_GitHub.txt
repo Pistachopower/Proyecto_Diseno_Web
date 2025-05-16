@@ -77,5 +77,10 @@ Luego en nuestro repositorio, debemos ir a settings, pages (asegúrate que está
   
 Error 404 en GitHub pages
 Aplica los siguientes comandos: 
+
+pull origin gh-pages --rebase
+git rebase --abort
+ git push origin gh-pages --force
+
 rm -rf dist
 npm run build
