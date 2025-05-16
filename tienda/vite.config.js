@@ -10,5 +10,5 @@ export default defineConfig({
     }
   },
   plugins: [vue(), ghPages()],
-  base: "Proyecto_Diseno_Web"
+  base: "/Proyecto_Diseno_Web/"
 });

@@ -41,7 +41,7 @@ export default defineConfig({
     }
   },
   plugins: [vue(), ghPages()],
-  base: "Proyecto_Diseno_Web"
+  base: "/Proyecto_Diseno_Web/"
 });
 
 
@@ -58,6 +58,15 @@ Debe quedar así:
   
 Aplicamos el siguiente comando para que se pueda ver la página:
 npm run build
+
+Ir a index.js y agregar el nombre de la ruta que va a tomar 
+tu repositorio (evita que salga 404 en github page):
+
+const router = createRouter({
+  history: createWebHistory('/NOMBRE_PROYECTO_GITHUB/'),
+  routes,
+});
+
 
 Subimos los cambios a nuestro repositorio remoto.
 
