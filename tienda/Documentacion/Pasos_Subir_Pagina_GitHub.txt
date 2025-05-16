@@ -75,5 +75,7 @@ Dato: puedes ir a la seccion Actions y saber si la página se está ejecutando.
 Luego en nuestro repositorio, debemos ir a settings, pages (asegúrate que estás en la rama del repositorio pages), 
 
   
-
-
+Error 404 en GitHub pages
+Aplica los siguientes comandos: 
+rm -rf dist
+npm run build
