@@ -75,12 +75,13 @@ Dato: puedes ir a la seccion Actions y saber si la página se está ejecutando.
 Luego en nuestro repositorio, debemos ir a settings, pages (asegúrate que estás en la rama del repositorio pages), 
 
   
+Soluciones
+Problemas para subir cambios a tu repositorio
+git rebase --abort
+git push origin gh-pages --force
+
+
 Error 404 en GitHub pages
 Aplica los siguientes comandos: 
-
-pull origin gh-pages --rebase
-git rebase --abort
- git push origin gh-pages --force
-
 rm -rf dist
 npm run build
