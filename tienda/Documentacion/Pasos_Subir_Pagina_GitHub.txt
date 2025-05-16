@@ -1,0 +1,70 @@
+Creamos una rama para el despliegue:
+git branch gh-pages
+git checkout gh-pages
+
+Instalamos libreria para el despliegue:
+npm install vite-plugin-gh-pages --save-dev
+
+Vamos al archivo vite.config.js:
+// vite.config.js
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+
+export default defineConfig({
+  resolve: {
+    alias: {
+      '@': '/src'
+    }
+  },
+  plugins: [vue()],
+});
+
+
+Hacemos la configuración: 
+Aquí: plugins: [vue()],  --> agregamos: plugins: [vue(), ghPages()  ],
+
+Importante: debe estar importado esto: import { ghPages } from 'vite-plugin-gh-pages';  para ghPages().
+
+Luego agregamos el nombre del repositorio:
+ base: "Proyecto_Diseno_Web"
+ 
+Debe quedar así:
+// vite.config.js
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import { ghPages } from 'vite-plugin-gh-pages';
+
+export default defineConfig({
+  resolve: {
+    alias: {
+      '@': '/src'
+    }
+  },
+  plugins: [vue(), ghPages()],
+  base: "Proyecto_Diseno_Web"
+});
+
+
+Ahora vamos al archivo package.json para añadir nuevo script que es el deploy en el objeto "scripts" con la clave y valor: 
+"deploy": "vite build && vite-gh-pages"
+
+Debe quedar así: 
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "vite build && vite-gh-pages"
+  },
+  
+Aplicamos el siguiente comando para que se pueda ver la página:
+npm run build
+
+Subimos los cambios a nuestro repositorio remoto.
+
+Dato: puedes ir a la seccion Actions y saber si la página se está ejecutando.
+
+Luego en nuestro repositorio, debemos ir a settings, pages (asegúrate que estás en la rama del repositorio pages), 
+
+  
+
+
