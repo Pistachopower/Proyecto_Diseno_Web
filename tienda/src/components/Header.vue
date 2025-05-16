@@ -29,7 +29,10 @@ const logout = () => {
   userAvatar.value = ''; // Restablece el avatar
 
   // Recargar la página para mostrar el modal nuevamente
-  window.location.reload();
+  //window.location.reload();
+
+  //esto es para github pages
+  window.location.href = '/Proyecto_Diseno_Web/';
 };
 
 
