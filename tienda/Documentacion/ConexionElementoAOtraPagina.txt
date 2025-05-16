@@ -1,4 +1,0 @@
-Conexión de un elemento a otra pagina 
-1-Creamos una vista CartView
-2-En el index agregamos la ruta del carrito
-3- En el Header.vue hacemos el enlace con la etiqueta <router-link to=/cart">
