@@ -27,24 +27,6 @@ La versión de Vue.js que estás usando es 3.5.13.
 
 
 
-
-
-Header antiguo:
-    <script setup>
-</script>
-
-
-
-<style scoped>
-    header {
-        background-color: #333;
-        color: white;
-        text-align: center;
-        padding: 1rem;
-    }
-</style>
-
-
 Logica
 Creas la view
 Luego el componente 
@@ -109,11 +91,11 @@ te adjunto los comentarios del proyecto:
 
     En inicio enlazar los productos del carrusel con el detalle del producto. (X)
 
-    En la página de productos, añadir filtros por categorías y que el buscador busque a medida que se escribe. (POR PROBAR)
+    En la página de productos, añadir filtros por categorías y que el buscador busque a medida que se escribe. (X)
     Las categorías debes cogerlas dinámicamente desde el json de productos.
 
     Al añadir un producto al carro, añadir algún tipo de animacioń o feedback para que el usuario sepa que se ha añadido.
-    En el icono del carro puedes usar un Bagde de Bootstrap (https://getbootstrap.com/docs/5.3/components/badge/) (EN CONSTRUCCION)
+    En el icono del carro puedes usar un Bagde de Bootstrap (https://getbootstrap.com/docs/5.3/components/badge/) (X)
 
     Mejorar la visualización cuando se muestra un producto y añadir un botón para añadir al carro, que en la vista de detalle no está.
 

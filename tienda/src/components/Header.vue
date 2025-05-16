@@ -44,7 +44,7 @@ const logout = () => {
         <i class="bi bi-shop-window fs-3"></i>
       </a>
 
-      <!-- Botón para colapsar el menú en pantallas pequeñas -->
+      <!-- Botón colapsable -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -53,6 +53,7 @@ const logout = () => {
       <!-- Menú de navegación -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto align-items-lg-center gap-2 gap-lg-3">
+
           <!-- Enlaces principales -->
           <li class="nav-item">
             <router-link class="nav-link" to="/">Inicio</router-link>
@@ -64,7 +65,7 @@ const logout = () => {
             <router-link class="nav-link" to="/contacto">Contacto</router-link>
           </li>
 
-          <!-- Mostrar botones según el estado de sesión -->
+          <!-- Si NO está logueado -->
           <li class="nav-item d-flex align-items-center gap-2" v-if="!isLoggedIn">
             <button class="btn btn-outline-light">
               <i class="bi bi-pencil-square"></i> Registrarse
@@ -72,40 +73,10 @@ const logout = () => {
             <button class="btn btn-warning">
               <i class="bi bi-key"></i> Iniciar sesión
             </button>
-          </li>
 
-          <li class="nav-item d-flex align-items-center gap-2" v-else>
-            <!-- Avatar y nombre del usuario -->
-            <img v-if="userAvatar" :src="userAvatar" alt="Avatar" class="rounded-circle border border-light"
-              style="width: 40px; height: 40px;" />
-            <span class="text-white">{{ userName }}</span>
-            <!-- Botón de cerrar sesión -->
-            <button class="btn btn-danger" @click="logout">
-              <i class="bi bi-box-arrow-right"></i> Cerrar sesión
-            </button>
-          </li>
-
-          <!-- Ícono del carrito -->
-          <li class="nav-item">
+            <!-- Carrito -->
             <router-link class="nav-link position-relative text-white" to="/cart">
               <i class="bi bi-cart3 fs-4"></i>
-            </router-link>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-
-
-
-          <!-- Menú de navegación POR PROBAR -->
-          <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto align-items-lg-center gap-2 gap-lg-3">
-          <!-- Ícono del carrito con Badge -->
-          <li class="nav-item position-relative">
-            <router-link class="nav-link position-relative text-white" to="/cart">
-              <i class="bi bi-cart3 fs-4"></i>
-              <!-- Badge para mostrar la cantidad de productos -->
               <span
                 v-if="cartItems.length > 0"
                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
@@ -114,10 +85,37 @@ const logout = () => {
               </span>
             </router-link>
           </li>
+
+          <!-- Si está logueado -->
+          <li class="nav-item d-flex align-items-center gap-2" v-else>
+            <!-- Avatar -->
+            <img v-if="userAvatar" :src="userAvatar" alt="Avatar" class="rounded-circle border border-light"
+              style="width: 40px; height: 40px;" />
+            <span class="text-white">{{ userName }}</span>
+
+            <!-- Botón cerrar sesión -->
+            <button class="btn btn-danger" @click="logout">
+              <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+            </button>
+
+            <!-- Carrito -->
+            <router-link class="nav-link position-relative text-white" to="/cart">
+              <i class="bi bi-cart3 fs-4"></i>
+              <span
+                v-if="cartItems.length > 0"
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              >
+                {{ cartItems.length }}
+              </span>
+            </router-link>
+          </li>
+
         </ul>
       </div>
+    </div>
   </nav>
 </template>
+
 
 <style scoped>
 /* Estilo para el avatar */
