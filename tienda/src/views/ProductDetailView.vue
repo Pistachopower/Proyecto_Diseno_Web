@@ -3,25 +3,32 @@ import { useRoute } from 'vue-router';
 import { useProductsStore } from '@/stores/products';
 import { useCartStore } from '@/stores/cart';
 import { storeToRefs } from 'pinia';
+import { ref } from 'vue';
 
 import ProductosRelacionados from '@/components/ProductosRelacionados.vue';
 
-const route = useRoute(); // Accede a la ruta actual
-const productId = route.params.id; // Saca el ID del producto de la URL
+const route = useRoute();
+const productId = route.params.id;
 
-const productsStore = useProductsStore(); // Accedemos al store de productos
-const { allProduct } = storeToRefs(productsStore); // Sacamos la lista de productos
+const productsStore = useProductsStore();
+const { allProduct } = storeToRefs(productsStore);
 
-const cartStore = useCartStore(); // Accedemos al store del carrito
+const cartStore = useCartStore();
 
 // Buscamos el producto en la lista de productos con el ID de la URL
 const product = allProduct.value.find(p => p.id === parseInt(productId));
 
-// Función para añadir el producto al carrito
+// Toast reactivo
+const showToast = ref(false);
+
+// Función para añadir el producto al carrito y mostrar el toast
 const addToCart = () => {
   if (product) {
-    cartStore.addToCart(product); // Añade el producto al carrito
-    alert('Producto añadido al carrito'); // Feedback para el usuario
+    cartStore.addToCart(product);
+    showToast.value = true;
+    setTimeout(() => {
+      showToast.value = false;
+    }, 2000);
   }
 };
 </script>
@@ -51,6 +58,26 @@ const addToCart = () => {
     <div class="mt-5">
       <ProductosRelacionados :categoria="product.category" />
     </div>
+
+    <!-- Toast de confirmación -->
+    <div
+      class="toast-container position-fixed bottom-0 end-0 p-3"
+      style="z-index: 1055"
+      v-if="showToast"
+    >
+      <div class="toast show align-items-center text-white bg-success border-0" role="alert">
+        <div class="d-flex">
+          <div class="toast-body">
+            Producto añadido al carrito.
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            @click="showToast = false"
+          ></button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -59,8 +86,10 @@ const addToCart = () => {
   max-width: 100%;
   height: auto;
 }
-
 button {
   font-size: 1.2rem;
+}
+.toast-container {
+  z-index: 1055;
 }
 </style>

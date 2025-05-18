@@ -86,8 +86,7 @@ ideal para inicializar datos o hacer tareas al arrancar.
 Two-way Binding: Si tú escribes algo → cambia la variable en el código. Si el código cambia la variable → se actualiza lo que ves en pantalla.
 
 Requisitos: 
-Buenos días Nelson,
-te adjunto los comentarios del proyecto:
+
 
     En inicio enlazar los productos del carrusel con el detalle del producto. (X)
 
