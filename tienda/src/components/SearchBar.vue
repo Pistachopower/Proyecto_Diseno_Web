@@ -11,16 +11,36 @@ watch(textoBusqueda, (newValue) => {
 </script>
 
 <template>
-  <form class="d-flex my-4">
+  <form class="searchbar-form d-flex justify-content-center align-items-center">
     <input
       v-model="textoBusqueda"
       type="text"
-      class="form-control me-2"
+      class="form-control searchbar-input"
       placeholder="Buscar productos..."
       aria-label="Buscar"
     />
-    <button type="button" class="btn btn-primary">
+    <button type="button" class="btn btn-primary ms-2 searchbar-btn">
       <i class="bi bi-search"></i> Buscar
     </button>
   </form>
+
+
+  
 </template>
+
+<style scoped>
+.searchbar-form {
+  margin: 32px 0 32px 0; /* Arriba y abajo */
+  padding: 0 24px;        /* Izquierda y derecha */
+}
+
+.searchbar-input {
+  min-width: 250px;
+  max-width: 400px;
+  padding: 12px 16px;
+}
+
+.searchbar-btn {
+  padding: 10px 20px;
+}
+</style>

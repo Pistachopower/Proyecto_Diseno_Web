@@ -56,7 +56,7 @@ const addToCart = (producto) => {
     <!-- Barra de búsqueda -->
     <SearchBar v-model:search="textoBusqueda" />
 
-    <!-- Botones de categorías -->
+    <!--Botones de categorías-->
     <div class="container my-4">
       <div class="d-flex flex-wrap gap-2 mb-4">
         <button
@@ -128,10 +128,44 @@ const addToCart = (producto) => {
 </template>
 
 <style scoped>
-button.active {
-  background-color: #0d6efd;
-  color: white;
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
 }
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* 👇 Botón más compacto y centrado */
+.card-body .btn {
+  align-self: center;
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 500;
+  width: fit-content;
+  white-space: nowrap;
+}
+
 .toast-container {
   z-index: 1055;
 }
