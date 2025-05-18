@@ -1,60 +1,54 @@
 <script setup>
 import SearchBar from '@/components/SearchBar.vue';
-import { useProductsStore} from '@/stores/products';
+import { useProductsStore } from '@/stores/products';
 import { useCartStore } from '@/stores/cart';
 import { storeToRefs } from 'pinia';
 import { ref, onMounted, computed } from 'vue';
 
-// Hacemos el enlace con el store de productos
+// Enlace con el store de productos
 const productsStore = useProductsStore();
 const { allProduct, categories } = storeToRefs(productsStore);
 
-// Variables reactivas para el texto de búsqueda y la categoría seleccionada
+// Variables reactivas para búsqueda y categoría
 const textoBusqueda = ref('');
-const selectedCategory = ref(''); // '' significa "todas las categorías"
+const selectedCategory = ref('');
 
-// Variable reactiva para los productos filtrados
+// Computed para productos filtrados
 const filteredProducts = computed(() => {
-  // Filtrar por categoría
   let productosFiltrados = selectedCategory.value
     ? allProduct.value.filter(product => product.category === selectedCategory.value)
     : allProduct.value;
 
-  // Filtrar por texto de búsqueda
   if (textoBusqueda.value.trim()) {
     productosFiltrados = productosFiltrados.filter(product =>
       product.title.toLowerCase().includes(textoBusqueda.value.toLowerCase())
     );
   }
-
   return productosFiltrados;
 });
 
-// Cargar los productos y categorías al montar el componente
+// Cargar productos al montar
 onMounted(async () => {
-  await productsStore.fetchProducts(); // Carga los productos desde la API
+  await productsStore.fetchProducts();
 });
 
-
-//IMPLEMENTACION DEL TOAST DE BOOTSTRAP POR PROBAR
-// Función para filtrar productos por categoría
+// Filtro por categoría
 const filterByCategory = (category) => {
-  selectedCategory.value = category; // Actualiza la categoría seleccionada
+  selectedCategory.value = category;
 };
 
+// Carrito y Toast
 const cartStore = useCartStore();
-const showToast = ref(false); // Controla si el Toast se muestra o no
+const showToast = ref(false);
 
-// Función para añadir un producto al carrito
+// Añadir al carrito y mostrar Toast
 const addToCart = (producto) => {
-  cartStore.addToCart(producto); // Añade el producto al carrito
-  showToast.value = true; // Muestra el Toast
+  cartStore.addToCart(producto);
+  showToast.value = true;
   setTimeout(() => {
-    showToast.value = false; // Oculta el Toast después de 3 segundos
-  }, 3000);
+    showToast.value = false;
+  }, 2000);
 };
-
-
 </script>
 
 <template>
@@ -110,19 +104,14 @@ const addToCart = (producto) => {
         </div>
       </div>
     </div>
-  </div>
 
-
-
-  <!-- Toast de Bootstrap -->
-  <div>
     <!-- Toast de confirmación -->
     <div
       class="toast-container position-fixed bottom-0 end-0 p-3"
-      style="z-index: 11"
+      style="z-index: 1055"
       v-if="showToast"
     >
-      <div class="toast align-items-center text-white bg-success border-0" role="alert">
+      <div class="toast show align-items-center text-white bg-success border-0" role="alert">
         <div class="d-flex">
           <div class="toast-body">
             Producto añadido al carrito.
@@ -136,12 +125,14 @@ const addToCart = (producto) => {
       </div>
     </div>
   </div>
-
 </template>
 
 <style scoped>
 button.active {
   background-color: #0d6efd;
   color: white;
+}
+.toast-container {
+  z-index: 1055;
 }
 </style>
