@@ -1,6 +1,6 @@
 
 Enlace de la página:
-https://pistachopower.github.io/cart
+
 
 Importante:
 Suele dar errores 404, pero puedes volver a cargar para mirarla de nuevo. 
