@@ -13,21 +13,7 @@ const { allProduct, categories } = storeToRefs(productsStore);
 const textoBusqueda = ref('');
 const selectedCategory = ref('');
 
-// Computed para productos filtrados
-const filteredProducts = computed(() => {
-  let productosFiltrados = selectedCategory.value
-    ? allProduct.value.filter(product => product.category === selectedCategory.value)
-    : allProduct.value;
-
-  if (textoBusqueda.value.trim()) {
-    productosFiltrados = productosFiltrados.filter(product =>
-      product.title.toLowerCase().includes(textoBusqueda.value.toLowerCase())
-    );
-  }
-  return productosFiltrados;
-});
-
-// Cargar productos al montar
+// Cargar productos al entrar en la página
 onMounted(async () => {
   await productsStore.fetchProducts();
 });
@@ -36,6 +22,30 @@ onMounted(async () => {
 const filterByCategory = (category) => {
   selectedCategory.value = category;
 };
+
+// Computed para productos filtrados
+const filteredProducts = computed(() => {
+  let productosFiltrados = 
+  selectedCategory.value? 
+  //Si selectedCategory tiene un valor, filtrar por categoría
+  //sino muestra todos los productos
+    allProduct.value.filter(product => product.category === selectedCategory.value)
+    : allProduct.value;
+
+  //Si el usuario escribe un producto con
+  //que pertenece a la categoría seleccionada
+  //guardar en productosFiltrados
+  if (textoBusqueda.value.trim()) {
+    productosFiltrados = productosFiltrados.filter(product =>
+      product.title.toLowerCase().includes(textoBusqueda.value.toLowerCase())
+    );
+  }
+  return productosFiltrados;
+});
+
+
+
+
 
 // Carrito y Toast
 const cartStore = useCartStore();

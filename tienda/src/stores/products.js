@@ -4,7 +4,6 @@ export const useProductsStore = defineStore('allProduct', {
   state: () => ({
     allProduct: [], // Todos los productos
     categories: [], // Categorías únicas
-    productsByCategory: {}, // Productos separados por categoría
     loading: false,
     error: null,
   }),

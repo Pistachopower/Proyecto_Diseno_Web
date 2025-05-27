@@ -7,16 +7,24 @@ import { ref } from 'vue';
 
 import ProductosRelacionados from '@/components/ProductosRelacionados.vue';
 
-const route = useRoute();
-const productId = route.params.id;
-
 const productsStore = useProductsStore();
 const { allProduct } = storeToRefs(productsStore);
 
-const cartStore = useCartStore();
+//creamos el objeto de la ruta para obtener el ID del producto
+const route = useRoute();
+
+// Obtenemos el ID del producto desde los parámetros de la ruta
+const productId = route.params.id;
 
 // Buscamos el producto en la lista de productos con el ID de la URL
 const product = allProduct.value.find(p => p.id === parseInt(productId));
+
+
+
+
+const cartStore = useCartStore();
+
+
 
 // Toast reactivo
 const showToast = ref(false);
