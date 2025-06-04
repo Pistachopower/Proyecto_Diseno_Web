@@ -51,7 +51,7 @@ El header utiliza los datos guardados en el localStorage para personalizar la ex
 Flujo del header:
 Cargar los datos del usuario:
 
-En el onMounted, se recuperan los datos (userName, userAvatar y isLoggedIn) desde el localStorage.
+En el onMounted del Header, se recuperan los datos (userName, userAvatar y isLoggedIn) desde el localStorage.
 Si el usuario está logueado (isLoggedIn es true), se muestran el nombre, el avatar y el botón de "Cerrar sesión".
 Si no está logueado, se muestran los botones de "Registrarse" e "Iniciar sesión".
 
@@ -65,7 +65,8 @@ onMounted(() => {
 
 Cerrar sesión:
 
-Cuando el usuario hace clic en "Cerrar sesión", se eliminan los datos del localStorage y se actualizan las variables reactivas.
+Cuando el usuario hace clic en "Cerrar sesión", se eliminan los datos del localStorage, se recarga la página
+y se actualizan las variables reactivas.
 La página se recarga para mostrar nuevamente el modal.
 
 const logout = () => {
