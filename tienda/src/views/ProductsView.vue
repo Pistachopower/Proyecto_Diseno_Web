@@ -29,7 +29,8 @@ const filteredProducts = computed(() => {
   selectedCategory.value? 
   //Si selectedCategory tiene un valor, filtrar por categoría
   //sino muestra todos los productos
-    allProduct.value.filter(product => product.category === selectedCategory.value)
+    allProduct.value.filter(
+      product => product.category === selectedCategory.value)
     : allProduct.value;
 
   //Si el usuario escribe un producto con
@@ -42,9 +43,6 @@ const filteredProducts = computed(() => {
   }
   return productosFiltrados;
 });
-
-
-
 
 
 // Carrito y Toast
