@@ -25,6 +25,7 @@ const filterByCategory = (category) => {
 
 // Computed para productos filtrados
 const filteredProducts = computed(() => {
+  
   let productosFiltrados = 
   selectedCategory.value? 
   //Si selectedCategory tiene un valor, filtrar por categoría

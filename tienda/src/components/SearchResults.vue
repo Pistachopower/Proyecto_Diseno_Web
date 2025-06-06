@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 const props = defineProps({
   results: {
     type: Array,
@@ -32,4 +32,4 @@ const props = defineProps({
 </template>
 
 
-<style scoped></style>
+<style scoped></style> -->

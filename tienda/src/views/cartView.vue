@@ -8,6 +8,7 @@ const { cartItems } = storeToRefs(cartStore);
 
 // Creamos un objeto reactivo para las cantidades
 const cantidades = ref({});
+
 cartItems.value.forEach(item => {
   if (!cantidades.value[item.id]) cantidades.value[item.id] = 1;
 });

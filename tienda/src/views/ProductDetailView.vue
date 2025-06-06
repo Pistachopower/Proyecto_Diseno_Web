@@ -20,8 +20,6 @@ const productId = route.params.id;
 const product = allProduct.value.find(p => p.id === parseInt(productId));
 
 
-
-
 const cartStore = useCartStore();
 
 
