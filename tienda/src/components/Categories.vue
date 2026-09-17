@@ -11,7 +11,7 @@
             <!-- Producto 1 -->
             <div class="col-md-3 mb-4">
                 <div class="card border-0 shadow-lg product-card">
-                    <img src="https://t1.uc.ltmcdn.com/es/posts/1/9/8/nombres_para_tiendas_de_ropa_de_mujer_50891_1_600.jpg"
+                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80"
                         class="card-img-top rounded-3" alt="Producto 1">
                     <div class="category-overlay">Ropa mujer</div>
                 </div>
