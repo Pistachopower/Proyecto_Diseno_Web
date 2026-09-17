@@ -6,8 +6,14 @@ export const useCartStore = defineStore('cart', {
   }),
   actions: {
     addToCart(product) {
-      // Agrega el producto al carrito
-      this.cartItems.push(product);
+      const existingProduct = this.cartItems.find(item => item.id === product.id);
+
+      if (existingProduct) {
+        existingProduct.quantity = (existingProduct.quantity || 1) + 1;
+        return;
+      }
+
+      this.cartItems.push({ ...product, quantity: 1 });
     },
     removeFromCart(productId) {
       // Elimina un producto del carrito por su ID(guarda los productos que no coinciden y deja fuera el que quieres eliminar)

@@ -10,7 +10,7 @@ const { cartItems } = storeToRefs(cartStore);
 const cantidades = ref({});
 
 cartItems.value.forEach(item => {
-  if (!cantidades.value[item.id]) cantidades.value[item.id] = 1;
+  if (!cantidades.value[item.id]) cantidades.value[item.id] = item.quantity || 1;
 });
 
 // Cambiar cantidad
