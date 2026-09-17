@@ -1,11 +1,13 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 //Se importa para el Badge del carrito
 import { useCartStore } from '@/stores/cart';
 import { storeToRefs } from 'pinia';
 
 const cartStore = useCartStore();
 const { cartItems } = storeToRefs(cartStore); // Obtenemos los productos del carrito
+const router = useRouter();
 
 
 const userName = ref('');
@@ -28,8 +30,7 @@ const logout = () => {
   userName.value = 'Invitado'; // Restablece el nombre del usuario
   userAvatar.value = ''; // Restablece el avatar
 
-  // Recargar la página para mostrar el modal nuevamente
-  window.location.reload();
+  router.replace({ name: 'Home' });
 };
 
 
