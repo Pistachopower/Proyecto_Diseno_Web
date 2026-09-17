@@ -12,8 +12,17 @@ export const useProductsStore = defineStore('allProduct', {
       this.loading = true;
       this.error = null;
       try {
-        const response = await fetch('https://fakestoreapi.com/products');
-        this.allProduct = await response.json();
+        const response = await fetch('https://dummyjson.com/products');
+
+        if (!response.ok) {
+          throw new Error(`Error HTTP: ${response.status}`);
+        }
+
+        const data = await response.json();
+        this.allProduct = data.products.map(product => ({
+          ...product,
+          image: product.thumbnail || product.images?.[0],
+        }));
 
         // Extraer categorías únicas
         this.categories = [...new Set(this.allProduct.map(product => product.category))];
